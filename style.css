@@ -70,6 +70,36 @@ body {
 .card-wrapper.active .card {
   transform: perspective(1000px) translate(0%) scale(1) rotateY(0);
 }
+
+@media (max-width: 768px) {
+  body {
+    /* Allow horizontal scrolling if the scaled card is wider than the viewport */
+    overflow-x: hidden;
+  }
+
+  .card-wrapper {
+    width: 100%; /* Allow the wrapper to fill the screen width */
+    display: flex; /* Use flex to center the card horizontally */
+    justify-content: center;
+    align-items: center; /* Center vertically if height allows */
+  }
+
+  .card-wrapper .card {
+    /*
+     * Current desktop displayed width is 300px * 0.5 = 150px.
+     * To make it 4x bigger (150px * 4 = 600px),
+     * and given its base width is 300px, the new scale factor must be 2 (600px / 300px).
+     * Increasing the scale further to 2.5 for a 'more bigger' appearance.
+     */
+    transform: perspective(1000px) translate(0%) scale(2.5) rotateY(0deg);
+    transform-origin: center center; /* Scale from the centre of the card */
+  }
+
+  .card-wrapper.active .card {
+    /* Ensure the active state also uses the new scale factor */
+    transform: perspective(1000px) translate(0%) scale(2.5) rotateY(0);
+  }
+}
 .card-wrapper.active .card .side.side-b {
   transform: perspective(1000px) rotateY(180deg);
 }
